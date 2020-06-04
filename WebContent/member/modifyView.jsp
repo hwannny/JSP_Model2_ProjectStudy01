@@ -9,21 +9,18 @@
 <link href="<%=project%>style.css" rel="stylesheet" type="text/css">
 <script src="<%=project%>script.js"></script>
 
-<h2> <%=page_modify%> </h2>
-
-<%
-	String id = (String) session.getAttribute( "memId" );
-	String passwd = request.getParameter( "passwd" );	
-%>
-<%
-	LogonDBBean memberDao = LogonDBBean.getInstance();
-	int result = memberDao.check( id, passwd );
+	<!-- 출력 -->
+	<h2> <%=page_modify%> </h2>
+	
+	<%
+	int result = (Integer) request.getAttribute("result");
+	%>
+	<%
 	if( result == 1 ) {
 		// 비밀번호가 같다
-		LogonDataBean memberDto = memberDao.getMember( id );
+		LogonDataBean memberDto =(LogonDataBean)request.getAttribute("memberDto");
 		%>
-		<form method="post" action="modifyPro.jsp" name="modifyform"
-			onsubmit="return modifycheck()">
+		<form method="post" action="modifyPro.do" name="modifyform" onsubmit="return modifycheck()">
 			<table>
 				<tr>
 					<th colspan="2"> <%=msg_modify%> </th>
@@ -35,14 +32,12 @@
 				<tr>
 					<th rowspan="2"> <%=str_passwd%> </th>
 					<td>
-						<input class="input" type="password" name="passwd" autofocus
-							maxlength="30" value="<%=memberDto.getPasswd()%>">
+						<input class="input" type="password" name="passwd" autofocus maxlength="30" value="<%=memberDto.getPasswd()%>">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input class="input" type="password" name="repasswd"
-							maxlength="30" value="<%=memberDto.getPasswd()%>">
+						<input class="input" type="password" name="repasswd" maxlength="30" value="<%=memberDto.getPasswd()%>">
 					</td>
 				</tr>
 				<tr>
@@ -70,10 +65,8 @@
 						String e[] = email.split("@");
 						%>
 						<td>
-							<input style="width:100px" class="input" type="text" 
-								name="email1" maxlength="25" value="<%=e[0]%>">
-							@ <input style="width:100px" class="input" type="text" 
-								name="email2" maxlength="25" value="<%=e[1]%>">
+							<input style="width:100px" class="input" type="text"  name="email1" maxlength="25" value="<%=e[0]%>">
+							@ <input style="width:100px" class="input" type="text" name="email2" maxlength="25" value="<%=e[1]%>">
 						</td>						
 						<%
 					}
@@ -87,7 +80,7 @@
 							// 전화번호가 없다
 							%>
 							<td>
-							 	<input style="width:25px" class="input" type="text" name="tel1" maxlength="3">
+								<input style="width:25px" class="input" type="text" name="tel1" maxlength="3">
 								- <input style="width:35px" class="input" type="text" name="tel2" maxlength="4">
 								- <input style="width:35px" class="input" type="text" name="tel3" maxlength="4">
 							</td>
@@ -97,12 +90,9 @@
 							String t[] = tel.split( "-" );
 							%>
 							<td>
-							 	<input style="width:25px" class="input" type="text" name="tel1" maxlength="3"
-							 		value="<%=t[0]%>">
-								- <input style="width:35px" class="input" type="text" name="tel2" maxlength="4"
-									value="<%=t[1]%>">
-								- <input style="width:35px" class="input" type="text" name="tel3" maxlength="4"
-									value="<%=t[2]%>">
+								 <input style="width:25px" class="input" type="text" name="tel1" maxlength="3" value="<%=t[0]%>">
+									- <input style="width:35px" class="input" type="text" name="tel2" maxlength="4" value="<%=t[1]%>">
+									- <input style="width:35px" class="input" type="text" name="tel3" maxlength="4" value="<%=t[2]%>">
 							</td>
 							<%
 						}					
@@ -122,8 +112,7 @@
 					<th colspan="2">
 						<input class="inputbutton" type="submit" value="<%=btn_mod%>">
 						<input class="inputbutton" type="reset" value="<%=btn_cancel%>">
-						<input class="inputbutton" type="button" value="<%=btn_mod_cancel%>"
-							onclick="location='main.jsp'">
+						<input class="inputbutton" type="button" value="<%=btn_mod_cancel%>" onclick="location='main.do'">
 					</th>					
 				</tr>		
 			</table>			
@@ -139,7 +128,7 @@
 		</script>
 		<%
 	}
-%>
+	%>
 
 
 

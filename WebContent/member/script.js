@@ -97,19 +97,20 @@ function confirmid() {
 		alert( iderror );
 		inputform.id.focus();
 	} else {
-		url = 'confirmId.jsp?id=' + inputform.id.value;
+		url = 'confirmId.do?id=' + inputform.id.value;
 		open( url, 'confirm', 'menubar=no,statusbar=no,scrollbar=no,width=450,height=300' );
 	}	
 }
 
 // 회원가입
 function inputcheck() {
+
 	if( inputform.check.value == '0' ) {
 		alert( confirmerror );
 		inputform.id.focus();
 		return false;
 	}	
-	
+
 	if( ! inputform.id.value ) {
 		alert( iderror );
 		inputform.id.focus();

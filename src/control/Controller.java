@@ -69,7 +69,6 @@ public class Controller extends HttpServlet {
 	}//init
 	
 	
-	
 	public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//URL 짜르기
 		String command = request.getRequestURI();
@@ -108,15 +107,12 @@ public class Controller extends HttpServlet {
 		
 	}//doProcess
 	
-	
-	
-	
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess( request, response );
-	}
+	}//doGet
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess( request, response );
-	}
-
-}
+	}//doPost
+	
+}//Class - Controller
